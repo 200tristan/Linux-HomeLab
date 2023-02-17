@@ -1,0 +1,47 @@
+docker run
+  -d
+  --name='Transmission_VPN'
+  --net='bridge'
+  --privileged=true
+  -e TZ="America/Los_Angeles"
+  -e HOST_OS="Unraid"
+  -e HOST_HOSTNAME="Serverus"
+  -e HOST_CONTAINERNAME="Transmission_VPN"
+  -e 'OPENVPN_USERNAME'='trandhir@gmail.com'
+  -e 'OPENVPN_PASSWORD'='Priyanka12!@'
+  -e 'OPENVPN_CONFIG'='us_east'
+  -e 'OPENVPN_PROVIDER'='NORDVPN'
+  -e 'LOCAL_NETWORK'='192.168.0.0/16'
+  -e 'TRANSMISSION_RPC_USERNAME'='ash'
+  -e 'TRANSMISSION_RPC_PASSWORD'='Patapon12'
+  -e 'OPENVPN_OPTS'='--inactive 3600
+  --ping 10
+  --ping-exit 60
+  --mute-replay-warnings'
+  -e 'PUID'='99'
+  -e 'PGID'='100'
+  -e 'TRANSMISSION_DOWNLOAD_DIR'='/downloads'
+  -e 'TRANSMISSION_RPC_AUTHENTICATION_REQUIRED'='true'
+  -e 'TRANSMISSION_RATIO_LIMIT_ENABLED'='true'
+  -e 'TRANSMISSION_DOWNLOAD_QUEUE_SIZE'='15'
+  -e 'TRANSMISSION_CACHE_SIZE_MB'='10'
+  -e 'TRANSMISSION_INCOMPLETE_DIR'='/downloads/incomplete'
+  -e 'TRANSMISSION_WEB_UI'='transmission-web-control'
+  -e 'GLOBAL_APPLY_PERMISSIONS'='false'
+  -e 'WEBPROXY_ENABLED'='false'
+  -e 'PIA_OPENVPN_CONFIG_BUNDLE'='openvpn-tcp'
+  -l net.unraid.docker.managed=dockerman
+  -l net.unraid.docker.webui='http://[IP]:[PORT:9091]/'
+  -l net.unraid.docker.icon='https://raw.githubusercontent.com/activ/docker-templates/master/activ/images/transmission-icon.png'
+  -p '9091:9091/tcp'
+  -v '/mnt/user/T_Media/Torrent/':'/data':'rw'
+  -v '/mnt/user/12_TB/Downloads/':'/downloads':'rw'
+  -v '/mnt/user/T_Media/Torrent/watch/':'/watch':'rw'
+  -v '/mnt/user/12_TB/Downloads/':'/mnt/user/T_Media/Torrent/':'rw'
+  --cap-add=NET_ADMIN
+  --restart=always
+  --log-opt max-size=50m
+  --log-driver json-file
+  --dns 8.8.8.8
+  --dns 1.1.1.1 'haugene/transmission-openvpn:dev'
+05d7f257e68fbc69c46307f208be65e4de6ae979da04956a905f5196aa3f9a5e
