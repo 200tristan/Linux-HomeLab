@@ -1,0 +1,18 @@
+docker run
+  -d
+  --name='WireGuard-Easy'
+  --net='bridge'
+  --privileged=true
+  -e TZ="America/Los_Angeles"
+  -e HOST_OS="Unraid"
+  -e HOST_HOSTNAME="Serverus"
+  -e HOST_CONTAINERNAME="WireGuard-Easy"
+  -e 'WG_HOST'='192.168.68.145'
+  -e 'PASSWORD'='unraid'
+  -l net.unraid.docker.managed=dockerman
+  -l net.unraid.docker.webui='http://[IP]:[PORT:51821]'
+  -l net.unraid.docker.icon='https://raw.githubusercontent.com/SmartPhoneLover/unraid-docker-templates/main/templates/icons/wireguard-easy_200x200.png'
+  -p '51821:51821/tcp'
+  -p '51820:51820/udp'
+  -v '/mnt/user/appdata/wireguard-easy':'/etc/wireguard':'rw' 'weejewel/wg-easy'
+8b3f4e130436da2e42ab7d92b41f4d76988fe0e8e285b7ea4a16472b43c8026c
